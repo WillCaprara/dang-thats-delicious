@@ -1,0 +1,14 @@
+mixin review(review)
+    .review__header 
+        .review__author 
+            img.avatar(src=`${review.author.gravatar}`)
+            p= review.author.name
+        //- Adding title to this class is good for accesibiltys sake. For readers etc.
+        .review__stars(title=`Rated ${review.rating} out of 5 stars`)
+            = `★`.repeat(review.rating)
+            = `☆`.repeat(5 - review.rating)
+        //-datetime will give a timestamp for screenreaders (accesibility)
+        time.review__time(datetime=review.created)
+            = h.moment(review.created).fromNow()
+    .review__body
+        p= review.text
